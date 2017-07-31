@@ -72,16 +72,15 @@ class CitizenInitiative extends EventBase
         PostAddress $address,
         \DateTime $beginAt,
         \DateTime $finishAt,
-        string $slug = null,
-        \DateTime $createdAt = null,
-        int $participantsCount = 0,
+        bool $expertAssistanceNeeded = false,
+        string $expertAssistanceDescription = '',
         bool $coachingRequested = false,
-        CoachingRequest $coachingRequest
+        \DateTime $createdAt = null,
+        int $participantsCount = 0
     ) {
         $this->uuid = $uuid;
         $this->organizer = $organizer;
         $this->setName($name);
-        $this->slug = $slug;
         $this->category = $category;
         $this->description = $description;
         $this->postAddress = $address;
@@ -90,10 +89,10 @@ class CitizenInitiative extends EventBase
         $this->finishAt = $finishAt;
         $this->createdAt = $createdAt ?: new \DateTime('now');
         $this->updatedAt = $createdAt ?: new \DateTime('now');
+        $this->expertAssistanceNeeded = $expertAssistanceNeeded;
+        $this->expertAssistanceDescription = $expertAssistanceDescription;
         $this->coachingRequested = $coachingRequested;
-        $this->coachingRequest = $coachingRequest;
         $this->status = self::STATUS_SCHEDULED;
-        $this->legislativeCandidate = false;
         $this->skills = new ArrayCollection();
     }
 
@@ -154,6 +153,11 @@ class CitizenInitiative extends EventBase
     public function setCoachingRequested(bool $coachingRequested): void
     {
         $this->coachingRequested = $coachingRequested;
+    }
+
+    public function setCoachingRequest(CoachingRequest $coachingRequest): void
+    {
+        $this->coachingRequest = $coachingRequest;
     }
 
     public function getExpertAssistanceDescription(): ?string
