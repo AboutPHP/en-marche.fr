@@ -211,6 +211,10 @@
             <tag name="security.voter"/>
         </service>
 
+        <service id="app.voter.citizen_initiative_voter" class="AppBundle\CitizenInitiative\Voter\CitizenInitiativeVoter" public="false">
+            <tag name="security.voter"/>
+        </service>
+
         <!-- Events -->
         <service id="app.event.factory" class="AppBundle\Event\EventFactory"/>
 
